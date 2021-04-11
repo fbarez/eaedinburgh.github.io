@@ -1,0 +1,106 @@
+<!-- Main -->
+<article id="main">
+
+    <!-- One -->
+    <section class="wrapper style4 container">
+
+        <div class="row 100%">
+            <div class="12u 12u(narrower)">
+
+
+                <!-- Sidebar -->
+                    <div class="sidebar">
+
+                        <section style="margin-bottom:0px">
+                            <header>
+                                <h3 style="margin-bottom:0px;"></h3>
+		                                <ul class="buttons">
+			                                  For upcoming events consider joining our <li><a href="https://www.facebook.com/groups/1492448401050643/">Facebook Group</a></li>.
+		                                </ul>
+                            </header>
+                        </section>
+                        {% for event in site.data.events %} {% if event.published == true %}
+                        {% capture nowunix %}{{'now' | date: '%s'}}{% endcapture %}
+                        {% capture eventtime %}{{event.date | date: '%s'}}{% endcapture %}
+                        {% if eventtime > nowunix %}
+                        {% assign hasUpcoming = true %}
+                        {% endif %}
+                        {% if eventtime < nowunix %}
+                        {% assign hasPrevious = true %}
+                        {% endif %}
+                        {% endif %}{% endfor %}
+
+                        {% if hasUpcoming == true %}
+                        <section style="margin-top:0px;  padding-top:1em;">
+                            <header>
+                                <h3>Upcoming events</h3>
+                            </header>
+                        {% for event in site.data.events %} {% if event.published == true %}
+                        {% capture nowunix %}{{'now' | date: '%s'}}{% endcapture %}
+                        {% capture eventtime %}{{event.date | date: '%s'}}{% endcapture %}
+                        {% if eventtime > nowunix %}
+                        <div class="row 100% 12u 12u(narrower)" style="padding-left:1em;margin-bottom:1em;">
+                            <h4 style="width: 100%">{% if event.allday == true %}
+                                {{ event.date | date: "%d. %b %y" }}{% else %}{{ event.date | date: "%d. %b %y, %H:%M"}}{% endif %}: <b>{{ event.name }}</b></h4>
+                            <p style="margin-top: -10pt; margin-left: 25pt; width:55%; padding-top:0px; margin-bottom:0px; display: inline-block;">
+                                {{ event.description }}
+                            </p>
+                            <a style="margin-top: -10pt; margin-left: 25pt; width:35%; padding-top:0px; margin-bottom:0px; display: inline-block;" class="image featured"><img src="{{ site.baseurl }}/images/{{ event.img }}" alt="" /></a>
+                            {% if event.location != null %}
+                            <p style="margin-left: 0pt; padding-top:0px; width: :35%; display: inline-block;">
+                                Location: {{ event.location }}
+                            </p>
+                            {% endif %}
+                            {% if event.facebook != null %}
+                            <p style="margin-left: 25pt; padding-top:0px">
+                                Find out more on <a href="{{ event.facebook }}" >Facebook</a>.
+                            </p>
+                            {% endif %}
+                        </div>
+                        {% endif %} {% endif %} {% endfor %}
+                        </section>
+                        {% endif %}
+
+                        {% if hasPrevious == true %}
+                        <section style="margin-top:0px;  padding-top:1em;">
+                            <header>
+                                <h3>Past events</h3>
+                            </header>
+
+                        {% for event in site.data.events %} {% if event.published == true %}
+                        {% capture nowunix %}{{'now' | date: '%s'}}{% endcapture %}
+                        {% capture eventtime %}{{event.date | date: '%s'}}{% endcapture %}
+                        {% if eventtime < nowunix %}
+                        <div class="row 100% 12u 12u(narrower)" style="padding-left:1em; margin-bottom:1em;">
+                            <h3 style="width: 100%">{{ event.date | date: "%d. %b %y"}}: <b>{{ event.name }}</b></h3>
+
+                            <p style="margin-top: -10pt; margin-left: 25pt; width:100%; padding-top:0px; margin-bottom:0px;">
+                                {{ event.description }}
+                            </p>
+                            <p>
+                            <a style="margin-top: -10pt; margin-left: 25pt; width:35%; padding-top:0px;padding-left:0px; margin-bottom:0px; display: inline-block;" class="image featured"><img src="{{ site.baseurl }}/images/{{ event.img }}" alt="" /></a>
+                            </p>
+                            {% if event.facebook != null %}
+                            <p style="margin-left: 25pt; padding-top:0px">
+                                Find out more on <a href="{{ event.facebook }}" >Facebook</a>.
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        {% endif %} {% endif %} {% endfor %}
+                        </section>
+                        {% endif %}
+                        {% if hasPrevious != true and  hasUpcoming != true %}
+                        <section>
+                            <div>
+                                Sorry, but we do not have any events to show.
+                            </div>
+                        </section>
+                        {% endif %}
+                    </div>
+
+            </div>
+
+        </div>
+    </section>
+</article>

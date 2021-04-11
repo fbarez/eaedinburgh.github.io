@@ -1,0 +1,132 @@
+<!-- Main -->
+
+<script>
+ function myFunction() {
+     var x = document.getElementById("myDIV");
+     if (x.style.display === "none") {
+         x.style.display = "block";
+     } else {
+         x.style.display = "none";
+     }
+ }
+</script>
+
+<article id="main">
+
+    <!-- One -->
+    <section class="wrapper style4 container">
+
+        <div class="row 100%">
+            <div class="12u 12u(narrower)">
+
+
+                <!-- Sidebar -->
+                    <div class="sidebar">
+
+                        <section>
+                            <header>
+                                <h3>What is EdIntelligence all about?</h3>
+                            </header>
+                        </section>
+
+                        <section>
+                        <div class="row 100%">
+                            <div class="9u 12u(narrower)">
+                            <p>
+                                EdIntelligence aims to provide students with access to information and experiences concerning various aspects that are not otherwise available through the School or University.
+                            </p>
+                            <p>
+                                Throughout the year we invite professors, professionals and PhD students to share their current work and views on a variety of topics allowing our  members to learn from their experiences. In addition, we host workshops in which our members gain a further appreciation for the broad study of Machine Learning and Data Science. Meanwhile, we organise weekly meetings in which students are working on challenging real world machine learning and data science problems, enabling them to both gain an in-depth understanding and tackle hard tasks.
+                            </p>
+                            <p>
+                                One of our primary goals as a society is to prepare our members for the career path they desire. We have the privilege to work with premier technologists, and we devote ourselves to expanding these relationships.
+                            </p>
+                            </div>
+                        </div>
+                        </section>
+
+                        <section>
+                            <header>
+                                <h3>Meet your Society</h3>
+                            </header>
+                        </section>
+
+                        {% for teamMember in site.data.team %} {% if teamMember.team != null %} {% if teamMember.current == true %}
+                        <section>
+                        <div class="row 100%">
+                            <div class="3u 12u (narrower)">
+                            <a href="#" class="image member"><img src="{{ site.baseurl }}/images/{{ teamMember.image }}" alt="" /></a><br>
+                            </div>
+                            <div class="9u 12u(narrower)">
+                            <h3>{{ teamMember.name }}</h3>
+                            <p>
+                                {{ teamMember.description }}
+                            </p>
+                            {% for social in teamMember.social %}
+                            <a class="icon circle fa-{{ social["name"] }}" href="{{ social["link"] }}" ></a>
+                            {% endfor %}
+                            </div>
+                        </div>
+                        </section>
+                        {% endif %} {% endif %} {% endfor %}
+
+                        <section>
+                            <header>
+                                <h3>Alumni</h3>
+                            </header>
+                        </section>
+                        <button onclick="myFunction()">Show me!</button>
+
+                        <div id="myDIV" style="display:none">
+                        {% for teamMember in site.data.team %} {% if teamMember.team != null %} {% if teamMember.current != true %}
+                        <section>
+                        <div class="row 100%">
+                            <div class="3u 12u (narrower)">
+                            <a href="#" class="image member"><img src="{{ site.baseurl }}/images/{{ teamMember.image }}" alt="" /></a><br>
+                            </div>
+                            <div class="9u 12u(narrower)">
+                            <h3>{{ teamMember.name }}</h3>
+                            <p>
+                                {{ teamMember.description }}
+                            </p>
+                            {% for social in teamMember.social %}
+                            <a class="icon circle fa-{{ social["name"] }}" href="{{ social["link"] }}" ></a>
+                            {% endfor %}
+                            </div>
+                        </div>
+                        </section>
+                        {% endif %} {% endif %} {% endfor %}
+
+                        </div>
+<!--                         <section>
+                            <header>
+                                <h3>Former Members</h3>
+                            </header>
+                        </section> -->
+
+<!--                         {% for teamMember in site.data.team %} {% if teamMember.team == null %}
+                        <section>
+                        <div class="row 100%">
+                            <div class="3u 12u (narrower)">
+                            <a href="#" class="image member"><img src="{{ site.baseurl }}/images/{{ teamMember.image }}" alt="" /></a><br>
+                            </div>
+                            <div class="9u 12u(narrower)">
+                            <h3>{{ teamMember.name }}</h3>
+                            <p>
+                                {{ teamMember.description }}
+                            </p>
+                            {% for social in teamMember.social %}
+                            <a class="icon circle fa-{{ social["name"] }}" href="{{ social["link"] }}" ></a>
+                            {% endfor %}
+                            </div>
+                        </div>
+                        </section>
+                        {% endif %} {% endfor %} -->
+
+                    </div>
+
+            </div>
+
+        </div>
+    </section>
+</article>
